@@ -3,7 +3,7 @@ package almacen;
 /*
  * Nombre: ConexionDB.java
  * Objetivo: Realizar la conexión con una base de datos desde java
- * Autor: alumnos de TAP...
+ * Autor: alumnos de TAP....
  * Fecha: 05/03/2012
  */
 
