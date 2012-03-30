@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Conceptos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     tablacatalogoconceptos.`Clave` AS tablacatalogoconceptos_Clave,
+     tablacatalogoconceptos.`Descripción` AS tablacatalogoconceptos_Descripción
+FROM
+     `tablacatalogoconceptos` tablacatalogoconceptos]]>
+	</queryString>
+	<field name="tablacatalogoconceptos_Clave" class="java.lang.Integer"/>
+	<field name="tablacatalogoconceptos_Descripción" class="java.lang.String"/>
+	<group name="tablacatalogoconceptos_Clave">
+		<groupExpression><![CDATA[$F{tablacatalogoconceptos_Clave}]]></groupExpression>
+	</group>
+	<group name="tablacatalogoconceptos_Descripción">
+		<groupExpression><![CDATA[$F{tablacatalogoconceptos_Descripción}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="78" splitType="Stretch">
+			<staticText>
+				<reportElement x="129" y="24" width="271" height="29" forecolor="#000000"/>
+				<textElement textAlignment="Center">
+					<font fontName="Lucida Calligraphy" size="18" isBold="true" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Mi empresa S.A de C.V]]></text>
+			</staticText>
+			<image>
+				<reportElement x="44" y="16" width="67" height="50"/>
+				<imageExpression><![CDATA["C:\\Users\\Marlene\\Desktop\\Imagenes BD\\conceptos.jpg"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="418" y="16" width="67" height="50"/>
+				<imageExpression><![CDATA["C:\\Users\\Marlene\\Desktop\\Imagenes BD\\conceptos.jpg"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="71" width="555" height="1"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="63" splitType="Stretch">
+			<staticText>
+				<reportElement x="209" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Latha" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONCEPTOS]]></text>
+			</staticText>
+			<rectangle radius="10">
+				<reportElement x="0" y="20" width="555" height="20" backcolor="#CCCCFF"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="152" y="22" width="198" height="20"/>
+				<textElement textAlignment="Justified">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Clave                   Descripción]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="19" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="29" splitType="Stretch">
+			<textField>
+				<reportElement x="155" y="0" width="64" height="20" forecolor="#FF0033"/>
+				<textElement textAlignment="Justified">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tablacatalogoconceptos_Clave}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="242" y="0" width="214" height="20"/>
+				<textElement textAlignment="Justified">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tablacatalogoconceptos_Descripción}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="456" y="34" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
