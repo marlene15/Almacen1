@@ -1,25 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Productos" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Productos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
-	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
-	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
-	<style name="Detail" fontName="Arial" fontSize="12"/>
-	<style name="Row" mode="Transparent">
-		<conditionalStyle>
-			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
-			<style backcolor="#E6DAC3"/>
-		</conditionalStyle>
-	</style>
-	<queryString>
+	<queryString language="SQL">
 		<![CDATA[SELECT
- *
+     tablacatalogoproductos.`Clave` AS tablacatalogoproductos_Clave,
+     tablacatalogoproductos.`Descripcion` AS tablacatalogoproductos_Descripcion,
+     tablacatalogoproductos.`Unidad` AS tablacatalogoproductos_Unidad,
+     tablacatalogoproductos.`Precio` AS tablacatalogoproductos_Precio,
+     tablacatalogoproductos.`Proveedor` AS tablacatalogoproductos_Proveedor
 FROM
-     `tablacatalogoproductos` tablacatalogoproductos
-WHERE 
-     clave = $F{tablacatalogoproductos_Clave}]]>
+     `tablacatalogoproductos` tablacatalogoproductos]]>
 	</queryString>
 	<field name="tablacatalogoproductos_Clave" class="java.lang.Integer"/>
 	<field name="tablacatalogoproductos_Descripcion" class="java.lang.String"/>
@@ -28,151 +20,119 @@ WHERE
 	<field name="tablacatalogoproductos_Proveedor" class="java.lang.Integer"/>
 	<group name="tablacatalogoproductos_Clave">
 		<groupExpression><![CDATA[$F{tablacatalogoproductos_Clave}]]></groupExpression>
-		<groupHeader>
-			<band height="37">
-				<frame>
-					<reportElement mode="Opaque" x="-21" y="7" width="843" height="24" forecolor="#B89F7D" backcolor="#F2EBDF"/>
-					<rectangle>
-						<reportElement mode="Opaque" x="21" y="0" width="36" height="24" backcolor="#736343"/>
-						<graphicElement>
-							<pen lineWidth="0.0"/>
-						</graphicElement>
-					</rectangle>
-					<textField>
-						<reportElement style="SubTitle" x="68" y="0" width="755" height="24" forecolor="#736343"/>
-						<textElement>
-							<font isBold="true"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{tablacatalogoproductos_Clave}]]></textFieldExpression>
-					</textField>
-				</frame>
-			</band>
-		</groupHeader>
-		<groupFooter>
-			<band height="6"/>
-		</groupFooter>
+	</group>
+	<group name="tablacatalogoproductos_Descripcion">
+		<groupExpression><![CDATA[$F{tablacatalogoproductos_Descripcion}]]></groupExpression>
+	</group>
+	<group name="tablacatalogoproductos_Unidad">
+		<groupExpression><![CDATA[$F{tablacatalogoproductos_Unidad}]]></groupExpression>
+	</group>
+	<group name="tablacatalogoproductos_Precio">
+		<groupExpression><![CDATA[$F{tablacatalogoproductos_Precio}]]></groupExpression>
 	</group>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="101" splitType="Stretch">
+		<band height="80" splitType="Stretch">
 			<staticText>
-				<reportElement style="Title" x="218" y="0" width="315" height="62"/>
-				<textElement verticalAlignment="Middle">
-					<font pdfFontName="Times-Roman"/>
+				<reportElement x="129" y="27" width="271" height="29" forecolor="#000000"/>
+				<textElement textAlignment="Center">
+					<font fontName="Lucida Calligraphy" size="18" isBold="true" isUnderline="false" isStrikeThrough="false"/>
 				</textElement>
-				<text><![CDATA[PRODUCTOS]]></text>
+				<text><![CDATA[Mi empresa S.A de C.V]]></text>
 			</staticText>
 			<image>
-				<reportElement x="67" y="31" width="66" height="70"/>
+				<reportElement x="44" y="12" width="61" height="54"/>
 				<imageExpression><![CDATA["C:\\Users\\Marlene\\Desktop\\Imagenes BD\\productos.jpg"]]></imageExpression>
 			</image>
 			<image>
-				<reportElement x="579" y="31" width="66" height="70"/>
+				<reportElement x="432" y="12" width="61" height="54"/>
 				<imageExpression><![CDATA["C:\\Users\\Marlene\\Desktop\\Imagenes BD\\productos.jpg"]]></imageExpression>
 			</image>
+			<line>
+				<reportElement x="0" y="73" width="552" height="1"/>
+			</line>
 		</band>
 	</title>
 	<pageHeader>
-		<band splitType="Stretch"/>
-	</pageHeader>
-	<columnHeader>
-		<band height="16" splitType="Stretch">
-			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="802" height="1"/>
-				<graphicElement>
-					<pen lineWidth="0.5" lineColor="#999999"/>
-				</graphicElement>
-			</line>
+		<band height="63" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="0" y="30" width="552" height="20" backcolor="#CCCCFF"/>
+			</rectangle>
 			<staticText>
-				<reportElement style="Column header" x="0" y="0" width="200" height="15" forecolor="#736343"/>
-				<textElement/>
-				<text><![CDATA[Descripción]]></text>
+				<reportElement x="15" y="32" width="540" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[            Clave              Descripción                   Unidad            Precio                 Proveedor]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="188" y="0" width="200" height="15" forecolor="#736343"/>
-				<textElement/>
-				<text><![CDATA[Unidad]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="400" y="0" width="200" height="15" forecolor="#736343"/>
-				<textElement/>
-				<text><![CDATA[Precio]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="600" y="0" width="200" height="15" forecolor="#736343"/>
-				<textElement/>
-				<text><![CDATA[Proveedor]]></text>
+				<reportElement x="216" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Latha" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRODUCTOS]]></text>
 			</staticText>
 		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="15" splitType="Stretch">
-			<frame>
-				<reportElement style="Row" mode="Opaque" x="0" y="0" width="802" height="15"/>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" x="0" y="0" width="200" height="15"/>
-					<textElement/>
-					<textFieldExpression><![CDATA[$F{tablacatalogoproductos_Descripcion}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" x="200" y="0" width="200" height="15"/>
-					<textElement/>
-					<textFieldExpression><![CDATA[$F{tablacatalogoproductos_Unidad}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" x="400" y="0" width="200" height="15"/>
-					<textElement/>
-					<textFieldExpression><![CDATA[$F{tablacatalogoproductos_Precio}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" x="600" y="0" width="200" height="15"/>
-					<textElement/>
-					<textFieldExpression><![CDATA[$F{tablacatalogoproductos_Proveedor}]]></textFieldExpression>
-				</textField>
-			</frame>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="68" y="5" width="54" height="20" forecolor="#FF0000"/>
+				<textElement textAlignment="Justified">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tablacatalogoproductos_Clave}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="129" y="5" width="141" height="20"/>
+				<textElement textAlignment="Justified">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tablacatalogoproductos_Descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="281" y="5" width="66" height="20"/>
+				<textElement textAlignment="Justified">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tablacatalogoproductos_Unidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="347" y="5" width="100" height="20"/>
+				<textElement textAlignment="Justified">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tablacatalogoproductos_Precio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="457" y="5" width="95" height="20"/>
+				<textElement textAlignment="Justified">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tablacatalogoproductos_Proveedor}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="6" splitType="Stretch">
-			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="802" height="1"/>
-				<graphicElement>
-					<pen lineWidth="0.5" lineColor="#999999"/>
-				</graphicElement>
-			</line>
-		</band>
+		<band height="45" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="25" splitType="Stretch">
-			<frame>
-				<reportElement mode="Opaque" x="-21" y="1" width="843" height="24" forecolor="#D0B48E" backcolor="#F2EBDF"/>
-				<textField evaluationTime="Report">
-					<reportElement style="Column header" x="783" y="1" width="40" height="20" forecolor="#736343"/>
-					<textElement verticalAlignment="Middle">
-						<font size="10" isBold="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement style="Column header" x="703" y="1" width="80" height="20" forecolor="#736343"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle">
-						<font size="10" isBold="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
-				</textField>
-				<textField pattern="EEEEE dd MMMMM yyyy">
-					<reportElement style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343"/>
-					<textElement verticalAlignment="Middle">
-						<font size="10" isBold="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-				</textField>
-			</frame>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="457" y="34" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageFooter>
 	<summary>
-		<band splitType="Stretch"/>
+		<band height="42" splitType="Stretch"/>
 	</summary>
 </jasperReport>
