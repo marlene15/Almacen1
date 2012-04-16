@@ -9,14 +9,45 @@ package almacen;
  *
  * @author Marlene Alejandra Maciel Torres 
  */
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 public class catalogoDestinos extends javax.swing.JFrame {
 
     /**
      * Creates new form catalogoDestinos
      */
+    int maydoc,numdoc;
     public catalogoDestinos() {
         initComponents();
+        try//Agrega el número del documento
+         {
+             Conexion2 miconexion=new Conexion2();//se conecta 
+             
+             String cons="select * from tablacatalogodestinos";             
+             ResultSet consulta=miconexion.consulta(cons); //se envia la consulta
+             
+             if(consulta.next())//pegunta si hay datos en la tabla
+             {
+                 do 
+                 {  numdoc=Integer.parseInt(consulta.getString(1).toString())+1;                    
+                    if(maydoc<numdoc){
+                        maydoc=numdoc;
+                    }
+                    else{
+                      maydoc=maydoc;  
+                    }
+                   jTextField1.setText(Integer.toString(maydoc));//aqui se  inserta el numero del documento
+                   
+                 }while(consulta.next()); 
+             }
+             else{
+               jTextField1.setText(Integer.toString(1));  
+             }
+         }         
+         catch(Exception ex)
+         {
+             System.out.print(ex);
+         }
     }
 
     /**
@@ -47,6 +78,8 @@ public class catalogoDestinos extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Clave del Destino: ");
+
+        jTextField1.setEditable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Módulo de Captura de Destinos");
@@ -158,6 +191,7 @@ public class catalogoDestinos extends javax.swing.JFrame {
             miConexion.psPrepararSentencias.setString(2,jTextField2.getText());
             //Escribir en la tabla
             miConexion.psPrepararSentencias.executeUpdate();
+            JOptionPane.showMessageDialog(null," Datos Guardados Correctamente");
             
         }catch(Exception e){
             System.out.println(e.getCause());
@@ -173,6 +207,7 @@ public class catalogoDestinos extends javax.swing.JFrame {
                 jTextField2.requestFocus();
             }
           }
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

@@ -161,6 +161,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField1">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField2">
         </Component>
@@ -235,14 +238,11 @@
         <Component class="javax.swing.JComboBox" name="jComboBox1">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="5">
+              <StringArray count="1">
                 <StringItem index="0" value="Ninguno"/>
-                <StringItem index="1" value="Pieza"/>
-                <StringItem index="2" value="Cent&#xed;metros"/>
-                <StringItem index="3" value="Saco de 20 kilos"/>
-                <StringItem index="4" value="Paquete de 1000 hojas"/>
               </StringArray>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1ActionPerformed"/>
@@ -269,11 +269,8 @@
         <Component class="javax.swing.JComboBox" name="jComboBox2">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
+              <StringArray count="1">
                 <StringItem index="0" value="Ninguno"/>
-                <StringItem index="1" value="Materiales la Marina"/>
-                <StringItem index="2" value="El&#xe9;ctricos de la villa"/>
-                <StringItem index="3" value="Mercado de pulgas"/>
               </StringArray>
             </Property>
           </Properties>

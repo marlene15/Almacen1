@@ -7,7 +7,7 @@ package almacen;
 
 /**
  *
- * @author Marlene Alejandra Maciel Torres 
+ * @author Administrador
  */
 import java.sql.*;
 import java.io.*;
@@ -18,8 +18,38 @@ public class catalogoUnidades extends javax.swing.JFrame {
     /**
      * Creates new form catalogoUnidades
      */
+    int maydoc,numdoc;
     public catalogoUnidades() {
         initComponents();
+        try//Agrega el número del documento
+         {
+             Conexion2 miconexion=new Conexion2();//se conecta 
+             
+             String cons="select * from tablacatalogounidades";             
+             ResultSet consulta=miconexion.consulta(cons); //se envia la consulta
+             
+             if(consulta.next())//pegunta si hay datos en la tabla
+             {
+                 do 
+                 {  numdoc=Integer.parseInt(consulta.getString(1).toString())+1;                    
+                    if(maydoc<numdoc){
+                        maydoc=numdoc;
+                    }
+                    else{
+                      maydoc=maydoc;  
+                    }
+                   jTextField1.setText(Integer.toString(maydoc));//aqui se  inserta el numero del documento
+                   
+                 }while(consulta.next()); 
+             }
+             else{
+               jTextField1.setText(Integer.toString(1));  
+             }
+         }         
+         catch(Exception ex)
+         {
+             System.out.print(ex);
+         }
     }
 
     /**
@@ -43,8 +73,6 @@ public class catalogoUnidades extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel2.setBackground(java.awt.SystemColor.activeCaptionBorder);
-
         jButton1.setBackground(new java.awt.Color(51, 51, 255));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Marlene\\Documents\\NetBeansProjects\\Factura\\src\\almacen\\f_35898221_1.jpg")); // NOI18N
@@ -65,6 +93,7 @@ public class catalogoUnidades extends javax.swing.JFrame {
             }
         });
 
+        jTextField1.setEditable(false);
         jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -109,13 +138,11 @@ public class catalogoUnidades extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(20, 20, 20)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(39, 39, 39)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -158,7 +185,7 @@ public class catalogoUnidades extends javax.swing.JFrame {
             miConexion.psPrepararSentencias.setString(2,jTextField2.getText());
             //Escribir en la tabla
             miConexion.psPrepararSentencias.executeUpdate();
-            
+            JOptionPane.showMessageDialog(null," Datos Guardados Correctamente");
         }catch(Exception e){
             System.out.println(e.getCause());
         }     
@@ -172,7 +199,8 @@ public class catalogoUnidades extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null," Faltan datos ");
             jTextField1.requestFocus();
             }
-        }       
+        }
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

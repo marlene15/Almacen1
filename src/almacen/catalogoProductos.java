@@ -16,8 +16,39 @@ public class catalogoProductos extends javax.swing.JFrame {
     /**
      * Creates new form catalogoProductos
      */
+    int numdoc,maydoc;
     public catalogoProductos() {
         initComponents();
+        try//Agrega el número del documento
+         {
+             Conexion2 miconexion=new Conexion2();//se conecta 
+             
+             String cons="select * from tablacatalogoproductos";             
+             ResultSet consulta=miconexion.consulta(cons); //se envia la consulta
+             
+             if(consulta.next())//pegunta si hay datos en la tabla
+             {
+                 do 
+                 {  numdoc=Integer.parseInt(consulta.getString(1).toString())+1;                    
+                    if(maydoc<numdoc){
+                        maydoc=numdoc;
+                    }
+                    else{
+                      maydoc=maydoc;  
+                    }
+                   jTextField1.setText(Integer.toString(maydoc));//aqui se  inserta el numero del documento
+                   
+                 }while(consulta.next()); 
+             }
+             else{
+               jTextField1.setText(Integer.toString(1));  
+             }
+         }         
+         catch(Exception ex)
+         {
+             System.out.print(ex);
+         }
+        
         try//Llena el ComboBox1
          {
              Conexion2 miconexion=new Conexion2();//se conecta 
@@ -28,8 +59,8 @@ public class catalogoProductos extends javax.swing.JFrame {
              if(consulta.next())//pegunta si hay datos en la tabla
              {
                  do 
-                 {                         
-                    jComboBox1.addItem(consulta.getString(2));  //aqui se  inserta los datos en el combobox 
+                 {  
+                     jComboBox1.addItem(consulta.getString(2));  //aqui se  inserta los datos en el combobox 
                  }while(consulta.next()); 
              }             
          }         
@@ -91,6 +122,8 @@ public class catalogoProductos extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Descripción del Producto: ");
 
+        jTextField1.setEditable(false);
+
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Clave del Producto: ");
 
@@ -120,7 +153,8 @@ public class catalogoProductos extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Unidades de medida:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ninguno", "Pieza", "Centímetros", "Saco de 20 kilos", "Paquete de 1000 hojas" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ninguno" }));
+        jComboBox1.setToolTipText("");
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -133,7 +167,7 @@ public class catalogoProductos extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("Precio:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ninguno", "Materiales la Marina", "Eléctricos de la villa", "Mercado de pulgas" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ninguno" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -239,26 +273,32 @@ public class catalogoProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try{
+        try {//Guarda el encabezado del documento
             //Variable para conexion
             Conexion miConexion;
             miConexion = new Conexion();
             //Declarar cadena para sentencias SQL 
-            String SentenciaInsert="insert into tablacatalogoproductos value (?,?,?,?,?)"; 
+            String SentenciaInsert = "insert into tablacatalogoproductos value (?,?,?,?,?)";
             //Preparar sentencia SQL
-            miConexion.psPrepararSentencias=miConexion.conn.prepareStatement(SentenciaInsert);
+            int n=1;
+            String num;
+            num=Integer.toString(n);
+            miConexion.psPrepararSentencias = miConexion.conn.prepareStatement(SentenciaInsert);
             //Ingresar datos de las cajas de texto
-            miConexion.psPrepararSentencias.setString(1,jTextField1.getText());
-            miConexion.psPrepararSentencias.setString(2,jTextField2.getText());
-            miConexion.psPrepararSentencias.setString(3,jComboBox1.getSelectedItem().toString());
-            miConexion.psPrepararSentencias.setString(4,jTextField3.getText());            
-            miConexion.psPrepararSentencias.setString(5,jComboBox2.getSelectedItem().toString());           
+            miConexion.psPrepararSentencias.setString(1, jTextField1.getText());
+            miConexion.psPrepararSentencias.setString(2, jTextField2.getText());
+            miConexion.psPrepararSentencias.setString(3, Integer.toString(jComboBox1.getSelectedIndex()));
+            miConexion.psPrepararSentencias.setString(4, jTextField3.getText());
+            miConexion.psPrepararSentencias.setString(5, Integer.toString(jComboBox2.getSelectedIndex()));
             //Escribir en la tabla
             miConexion.psPrepararSentencias.executeUpdate();
-            
-        }catch(Exception e){
+
+            JOptionPane.showMessageDialog(null," Datos Guardados Correctamente");
+        } catch (Exception e) {
             System.out.println(e.getCause());
-        }            
+            System.out.println(Integer.toString(jComboBox1.getSelectedIndex()));
+             System.out.println(Integer.toString(jComboBox2.getSelectedIndex()));
+        }
         
         if(jTextField1.getText().equals("")) { 
             JOptionPane.showMessageDialog(null," Faltan datos ");
@@ -275,7 +315,8 @@ public class catalogoProductos extends javax.swing.JFrame {
                     jTextField3.requestFocus();
                 }
             }
-        }        
+        }
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed

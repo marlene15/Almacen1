@@ -1,6 +1,7 @@
 package almacen;
 
 
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JOptionPane;
 
@@ -18,8 +19,38 @@ public class catalogoProveedores extends javax.swing.JFrame {
     /**
      * Creates new form catalogoProveedores
      */
+    int numdoc,maydoc;
     public catalogoProveedores() {
         initComponents();
+        try//Agrega el número del documento
+         {
+             Conexion2 miconexion=new Conexion2();//se conecta 
+             
+             String cons="select * from tablacatalogoproveedores";             
+             ResultSet consulta=miconexion.consulta(cons); //se envia la consulta
+             
+             if(consulta.next())//pegunta si hay datos en la tabla
+             {
+                 do 
+                 {  numdoc=Integer.parseInt(consulta.getString(1).toString())+1;                    
+                    if(maydoc<numdoc){
+                        maydoc=numdoc;
+                    }
+                    else{
+                      maydoc=maydoc;  
+                    }
+                   jTextField1.setText(Integer.toString(maydoc));//aqui se  inserta el numero del documento
+                   
+                 }while(consulta.next()); 
+             }
+             else{
+               jTextField1.setText(Integer.toString(1));  
+             }
+         }         
+         catch(Exception ex)
+         {
+             System.out.print(ex);
+         }
     }
 
     /**
@@ -51,6 +82,8 @@ public class catalogoProveedores extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 153, 153));
@@ -68,6 +101,8 @@ public class catalogoProveedores extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setText("RFC:");
+
+        jTextField1.setEditable(false);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Nombre:");
@@ -101,6 +136,10 @@ public class catalogoProveedores extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("No requerido");
+
+        jLabel10.setText("No requerido");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -115,17 +154,24 @@ public class catalogoProveedores extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel8)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel6)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel2))
+                                .addComponent(jLabel9)
+                                .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel10)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
+                                .addGap(19, 19, 19)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextField5)
                                     .addComponent(jTextField7)
@@ -173,10 +219,13 @@ public class catalogoProveedores extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel8)
+                        .addComponent(jLabel10))
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -233,7 +282,7 @@ public class catalogoProveedores extends javax.swing.JFrame {
             miConexion.psPrepararSentencias.setString(7,jTextField7.getText());
             //Escribir en la tabla
             miConexion.psPrepararSentencias.executeUpdate();
-            
+            JOptionPane.showMessageDialog(null," Datos Guardados Correctamente");
         }catch(Exception e){
             System.out.println(e.getCause());
         }
@@ -278,6 +327,7 @@ public class catalogoProveedores extends javax.swing.JFrame {
                 }
             }
         }
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -325,6 +375,8 @@ public class catalogoProveedores extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
