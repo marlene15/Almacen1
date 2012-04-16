@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Administrador
+ * @author Marlene Alejandra Maciel Torres 
  */
 public class catalogoProveedores extends javax.swing.JFrame {
 

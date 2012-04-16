@@ -7,7 +7,7 @@ package almacen;
 
 /**
  *
- * @author Marlene
+ * @author Marlene Alejandra Maciel Torres 
  */
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -31,19 +31,20 @@ public class iniciarReportes {
         
         try{
             Class.forName("com.mysql.jdbc.Driver"); //se carga el driver
-            conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/almacen","root","marlene");
-            System.out.println("Conexiónestablecida");
+            conn= DriverManager.getConnection("jdbc:mysql://localhost/almacen","root","marlene");
+            System.out.println("Conexión establecida");
             //JOptionPane.showMessageDialog(null,"Conexiónestablecida");
         }
         catch(Exception ex)
         {
             ex.printStackTrace();
-        }
-                
+        }   
+        
     }    
-     public void ejecutarReporte(String Clave){
+     public void ejecutarReporte(String rep, String titulo){         
+         String dir=rep;
         try{ 
-            String archivo = "Productos.jasper";
+            String archivo = dir;
             System.out.println("Cargando desde: " + archivo);
             if(archivo == null){
                 System.out.println("No se encuentra el archivo.");
@@ -51,7 +52,7 @@ public class iniciarReportes {
             }
             JasperReport masterReport=null;
             try {// Cargas tu reporte maestro
-                masterReport=(JasperReport) JRLoader.loadObject(archivo);
+                masterReport=(JasperReport)JRLoader.loadObject(archivo);                
             } 
             catch (JRException e){
                 System.out.println("Error cargando el reporte maestro: " + e.getMessage());
@@ -59,13 +60,13 @@ public class iniciarReportes {
             }
             //este es el parámetro, se pueden agregar más parámetros
             //basta con poner mas parametro.put
-            Map parametro= new HashMap();
-            parametro.put("tablacatalogoproductos_Clave",Clave);
+            Map parametros= new HashMap();
+           // parametro.put("clave",clave);
             //Reporte diseñado y compilado con iReport
-            JasperPrint jasperPrint= JasperFillManager.fillReport(masterReport,parametro,conn);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(masterReport, parametros, conn);
             //Se lanza el Viewerde Jasper, no termina aplicación al salir
             JasperViewer jviewer= new JasperViewer(jasperPrint,false);
-            jviewer.setTitle("REPORTE DE PRODUCTOS");
+            jviewer.setTitle(titulo);
             jviewer.setVisible(true);
         }
         catch (Exception j){

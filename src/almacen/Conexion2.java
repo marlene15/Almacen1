@@ -7,11 +7,13 @@ package almacen;
 
 /**
  *
- * @author Marlene
+ * @author Marlene Alejandra Maciel Torres 
  */
 import java.sql.*;
 import javax.swing.JOptionPane;
+
 public class Conexion2 {// este es el nombre de la clase
+     
     Connection miconexion;
      Statement stSetencias;
      ResultSet rsDatos;

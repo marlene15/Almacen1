@@ -1,6 +1,11 @@
 package almacen;
 
+import javax.help.*;
+import java.net.*;
+import javax.swing.JOptionPane;
 
+
+//</editor-fold>
 
 /*
  * To change this template, choose Tools | Templates
@@ -9,7 +14,7 @@ package almacen;
 
 /**
  *
- * @author Administrador
+ * @author Marlene Alejandra Maciel Torres 
  */
 public class pantallaPrincipal extends javax.swing.JFrame {
 
@@ -17,9 +22,37 @@ public class pantallaPrincipal extends javax.swing.JFrame {
      * Creates new form pantallaPrincipal
      */
     public pantallaPrincipal() {
+        
         initComponents();
+        this.setTitle("Control de Almacen"); //agregar el título a la pantalla
+        
+        HelpSet hs;
+        HelpBroker hb;
+        String helpHS = "Master.hs";//Archivo q indicara la estructura de la ayuda
+        ClassLoader cl = getMyLoader();
+        try
+        {
+            URL hsURL = HelpSet.findHelpSet(cl, helpHS);
+            hs = new HelpSet(null, hsURL);
+        }
+        catch (Exception ee)
+        {
+            //Error
+            System.out.println( "HelpSet " + ee.getMessage());
+            System.out.println("HelpSet "+ helpHS +" not found");
+            return;
+        }
+        hb = hs.createHelpBroker();//Crea interfaz de ayuda
+        this.itemAyuda.addActionListener(new CSH.DisplayHelpFromSource(hb));//Añade ayuda 
+        hs.setTitle("Ayuda control de Almacen");
     }
 
+    private ClassLoader getMyLoader()
+    {
+        ClassLoader back;
+        back = this.getClass().getClassLoader();
+        return back;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,7 +64,7 @@ public class pantallaPrincipal extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        menu = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -53,8 +86,8 @@ public class pantallaPrincipal extends javax.swing.JFrame {
         jMenuItem17 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        itemAyuda = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -64,7 +97,7 @@ public class pantallaPrincipal extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(153, 0, 153));
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Marlene\\Documents\\NetBeansProjects\\Factura\\src\\almacen\\inventario.jpg")); // NOI18N
-        jLabel1.setText("<HTML>\n<HEAD><HEAD\n<BODY>\n      FERRETERÍA VERDUZCO<br>\n      Avenida 20 de Noviembre #435<br>\n     28040 Colima,Colima,México<br>\n</BODY>\n</HTML>");
+        jLabel1.setText("<HTML> <HEAD><HEAD <BODY>       FERRETERÍA TORRES<br>       Avenida 20 de Noviembre #435<br>      28040 Colima,Colima,México<br> </BODY> </HTML>");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -86,11 +119,11 @@ public class pantallaPrincipal extends javax.swing.JFrame {
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        jMenuBar1.setBackground(new java.awt.Color(255, 0, 255));
-        jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenuBar1.setForeground(new java.awt.Color(51, 0, 204));
+        menu.setBackground(new java.awt.Color(255, 0, 255));
+        menu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        menu.setForeground(new java.awt.Color(51, 0, 204));
 
-        jMenu1.setText("Catalogos");
+        jMenu1.setText("Catálogos");
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("Productos");
@@ -137,10 +170,11 @@ public class pantallaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem5);
 
-        jMenuBar1.add(jMenu1);
+        menu.add(jMenu1);
 
         jMenu2.setText("Documentos");
 
+        jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem8.setText("Entrada");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,6 +183,7 @@ public class pantallaPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem8);
 
+        jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem9.setText("Salida");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,11 +192,11 @@ public class pantallaPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem9);
 
-        jMenuBar1.add(jMenu2);
+        menu.add(jMenu2);
 
         jMenu3.setText("Reportes");
 
-        jMenu6.setText("Catalogos");
+        jMenu6.setText("Catálogos");
 
         jMenuItem10.setText("Productos");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
@@ -208,25 +243,46 @@ public class pantallaPrincipal extends javax.swing.JFrame {
         jMenu7.setText("Documentos");
 
         jMenuItem11.setText("Entrada");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem11);
 
         jMenuItem17.setText("Salida");
+        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem17ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem17);
 
         jMenu3.add(jMenu7);
 
         jMenuItem12.setText("Existencia de almacen");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem12);
 
-        jMenuBar1.add(jMenu3);
+        menu.add(jMenu3);
 
         jMenu4.setText("Ayuda");
-        jMenuBar1.add(jMenu4);
+
+        itemAyuda.setText("Ver Ayuda");
+        itemAyuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemAyudaActionPerformed(evt);
+            }
+        });
+        jMenu4.add(itemAyuda);
+
+        menu.add(jMenu4);
 
         jMenu5.setText("Salir");
-
-        jMenuItem6.setText("Acerca de ");
-        jMenu5.add(jMenuItem6);
 
         jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem7.setText("Salir");
@@ -237,9 +293,9 @@ public class pantallaPrincipal extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem7);
 
-        jMenuBar1.add(jMenu5);
+        menu.add(jMenu5);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(menu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -258,7 +314,10 @@ public class pantallaPrincipal extends javax.swing.JFrame {
     /*
      * Método para salir de la aplicación
      */
+    
+    
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        JOptionPane.showMessageDialog(null, " GRACIAS POR UTILIZAR EL SOFTWARE");
         System.exit(2);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
@@ -334,6 +393,25 @@ public class pantallaPrincipal extends javax.swing.JFrame {
         new reportesUnidades().setVisible(true);
     }//GEN-LAST:event_jMenuItem16ActionPerformed
 
+    private void itemAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAyudaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_itemAyudaActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        // TODO add your handling code here:
+         new reporteDocEntrada().setVisible(true);
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
+        // TODO add your handling code here:
+        new reporteDocSalida().setVisible(true);
+    }//GEN-LAST:event_jMenuItem17ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        // TODO add your handling code here:
+        new reporteExistenciaEnAlmacen().setVisible(true);
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -376,6 +454,7 @@ public class pantallaPrincipal extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem itemAyuda;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -384,7 +463,6 @@ public class pantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
@@ -398,10 +476,10 @@ public class pantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuBar menu;
     // End of variables declaration//GEN-END:variables
 }

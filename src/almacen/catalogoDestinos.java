@@ -7,7 +7,7 @@ package almacen;
 
 /**
  *
- * @author Administrador
+ * @author Marlene Alejandra Maciel Torres 
  */
 import javax.swing.JOptionPane;
 public class catalogoDestinos extends javax.swing.JFrame {

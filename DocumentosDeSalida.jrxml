@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DocumentosDeSalida" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fecha" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     *,
+     dsalidamovimientos.`Nomov` AS dsalidamovimientos_Nomov,
+     dsalidamovimientos.`Clave` AS dsalidamovimientos_Clave,
+     dsalidamovimientos.`Descripcion` AS dsalidamovimientos_Descripcion,
+     dsalidamovimientos.`Unidad` AS dsalidamovimientos_Unidad,
+     dsalidamovimientos.`Cantidad` AS dsalidamovimientos_Cantidad,
+     dsalidamovimientos.`Precio` AS dsalidamovimientos_Precio,
+     dsalidamovimientos.`Subtotal` AS dsalidamovimientos_Subtotal,
+     dsalidamovimientos.`NumDeDocumento` AS dsalidamovimientos_NumDeDocumento,
+     dsalidatotal.`NumDeDocumento` AS dsalidatotal_NumDeDocumento,
+     dsalidatotal.`Total` AS dsalidatotal_Total,
+     dsalidaencabezado.`NumeroDeDocumento` AS dsalidaencabezado_NumeroDeDocumento,
+     dsalidaencabezado.`Fecha` AS dsalidaencabezado_Fecha,
+     dsalidaencabezado.`Concepto` AS dsalidaencabezado_Concepto,
+     dsalidaencabezado.`Proveedor` AS dsalidaencabezado_Proveedor
+FROM
+     `dsalidaencabezado` dsalidaencabezado INNER JOIN `dsalidamovimientos` dsalidamovimientos ON dsalidaencabezado.`NumeroDeDocumento` = dsalidamovimientos.`NumDeDocumento`
+     INNER JOIN `dsalidatotal` dsalidatotal ON dsalidaencabezado.`NumeroDeDocumento` = dsalidatotal.`NumDeDocumento`
+WHERE
+     Fecha = $P{fecha}]]>
+	</queryString>
+	<field name="NumeroDeDocumento" class="java.lang.Integer"/>
+	<field name="Fecha" class="java.lang.String"/>
+	<field name="Concepto" class="java.lang.String"/>
+	<field name="Proveedor" class="java.lang.String"/>
+	<field name="Nomov" class="java.lang.Integer"/>
+	<field name="Clave" class="java.lang.Integer"/>
+	<field name="Descripcion" class="java.lang.String"/>
+	<field name="Unidad" class="java.lang.String"/>
+	<field name="Cantidad" class="java.lang.Integer"/>
+	<field name="Precio" class="java.lang.Float"/>
+	<field name="Subtotal" class="java.lang.Float"/>
+	<field name="NumDeDocumento" class="java.lang.Integer"/>
+	<field name="Total" class="java.lang.Float"/>
+	<field name="dsalidamovimientos_Nomov" class="java.lang.Integer"/>
+	<field name="dsalidamovimientos_Clave" class="java.lang.Integer"/>
+	<field name="dsalidamovimientos_Descripcion" class="java.lang.String"/>
+	<field name="dsalidamovimientos_Unidad" class="java.lang.String"/>
+	<field name="dsalidamovimientos_Cantidad" class="java.lang.Integer"/>
+	<field name="dsalidamovimientos_Precio" class="java.lang.Float"/>
+	<field name="dsalidamovimientos_Subtotal" class="java.lang.Float"/>
+	<field name="dsalidamovimientos_NumDeDocumento" class="java.lang.Integer"/>
+	<field name="dsalidatotal_NumDeDocumento" class="java.lang.Integer"/>
+	<field name="dsalidatotal_Total" class="java.lang.Float"/>
+	<field name="dsalidaencabezado_NumeroDeDocumento" class="java.lang.Integer"/>
+	<field name="dsalidaencabezado_Fecha" class="java.lang.String"/>
+	<field name="dsalidaencabezado_Concepto" class="java.lang.String"/>
+	<field name="dsalidaencabezado_Proveedor" class="java.lang.String"/>
+	<variable name="dentradatotal_NumDeDocumento_1" class="java.lang.Integer" resetType="Column" calculation="System">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="62" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="61" width="752" height="1"/>
+			</line>
+			<image>
+				<reportElement x="537" y="0" width="85" height="58"/>
+				<imageExpression><![CDATA["C:\\Users\\Marlene\\Documents\\NetBeansProjects\\Factura\\Imagenes BD\\DOCTOS.jpg"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="92" y="0" width="85" height="58"/>
+				<imageExpression><![CDATA["C:\\Users\\Marlene\\Documents\\NetBeansProjects\\Factura\\Imagenes BD\\DOCTOS.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="172" y="14" width="371" height="29" forecolor="#000000"/>
+				<textElement textAlignment="Center">
+					<font fontName="Lucida Calligraphy" size="18" isBold="true" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[FERRETERIA TORRES S.A de C.V]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="19" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement x="5" y="4" width="38" height="20"/>
+				<textElement/>
+				<text><![CDATA[N°Doc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="56" y="4" width="43" height="20"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="125" y="4" width="52" height="20"/>
+				<textElement/>
+				<text><![CDATA[Concepto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="229" y="4" width="54" height="20"/>
+				<textElement/>
+				<text><![CDATA[Proveedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="317" y="4" width="39" height="20"/>
+				<textElement/>
+				<text><![CDATA[N°Mov]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="353" y="4" width="31" height="20"/>
+				<textElement/>
+				<text><![CDATA[Clave]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="4" width="61" height="20"/>
+				<textElement/>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="488" y="4" width="40" height="20"/>
+				<textElement/>
+				<text><![CDATA[Unidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="539" y="4" width="50" height="20"/>
+				<textElement/>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="597" y="4" width="35" height="20"/>
+				<textElement/>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="639" y="4" width="46" height="20"/>
+				<textElement/>
+				<text><![CDATA[Subtotal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="689" y="4" width="84" height="20"/>
+				<textElement/>
+				<text><![CDATA[TOTAL DEL DOC]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="36" splitType="Stretch">
+			<textField>
+				<reportElement x="6" y="6" width="23" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{dsalidaencabezado_NumeroDeDocumento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="7" width="69" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{dsalidaencabezado_Fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="115" y="7" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{dsalidaencabezado_Concepto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="222" y="7" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{dsalidaencabezado_Proveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="329" y="7" width="24" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{dsalidamovimientos_Nomov}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="359" y="8" width="27" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{dsalidamovimientos_Clave}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="8" width="87" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{dsalidamovimientos_Descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="489" y="8" width="53" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{dsalidamovimientos_Unidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="548" y="8" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{dsalidamovimientos_Cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="597" y="9" width="42" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{dsalidamovimientos_Precio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="647" y="8" width="46" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{dsalidamovimientos_Subtotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="696" y="8" width="56" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{dsalidatotal_Total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="72" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="733" y="34" width="22" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

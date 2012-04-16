@@ -6,7 +6,7 @@ package almacen;
 
 /**
  *
- * @author Marlene
+ * @author Marlene Alejandra Maciel Torres 
  */
 public class reporteDocSalida extends java.awt.Frame {
 

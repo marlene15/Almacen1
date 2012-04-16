@@ -7,7 +7,7 @@ package almacen;
 
 /**
  *
- * @author Administrador
+ * @author Marlene Alejandra Maciel Torres 
  */
 import java.sql.*;
 import java.io.*;

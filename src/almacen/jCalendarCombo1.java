@@ -7,7 +7,7 @@ package almacen;
 
 /**
  *
- * @author Marlene
+ * @author Marlene Alejandra Maciel Torres 
  */
 class jCalendarCombo1 {
 

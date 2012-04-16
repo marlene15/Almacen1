@@ -11,7 +11,7 @@ import java.sql.*;
 import java.io.*;
 
 public class Conexion {
-    static String bd="personal";
+    static String bd="almacen";
     static String login="root";
     static String password="marlene";
     static String url="jdbc:mysql://localhost/"+bd;
