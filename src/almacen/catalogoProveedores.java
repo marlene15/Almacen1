@@ -302,31 +302,20 @@ public class catalogoProveedores extends javax.swing.JFrame {
                     jTextField1.requestFocus();
                 }
                 else{
-                    if(jTextField5.getText().equals("")) { 
+                    if(jTextField4.getText().equals("")){                 
                         JOptionPane.showMessageDialog(null," Faltan datos ");
-                        jTextField5.requestFocus();
+                        jTextField4.requestFocus();
                     }
                     else{
-                        if(jTextField6.getText().equals("")) {         
+                        if(jTextField7.getText().equals("")){     
                             JOptionPane.showMessageDialog(null," Faltan datos ");
-                            jTextField6.requestFocus();
-                        }
-                        else{
-                            if(jTextField4.getText().equals("")){                    
-                              JOptionPane.showMessageDialog(null," Faltan datos ");
-                              jTextField4.requestFocus();
-                            }
-                            else{
-                                if(jTextField7.getText().equals("")){              
-                                  JOptionPane.showMessageDialog(null," Faltan datos ");
-                                  jTextField7.requestFocus();
+                            jTextField7.requestFocus();
                                 }
                             }
                         }
                     }
                 }
-            }
-        }
+            
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
